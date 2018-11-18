@@ -1,16 +1,17 @@
-
-@manila:    #fff6bf;
-@seafoam:   #bfffe1;
-@sky:       #bfe7ff;
-@pinkgenta: #ffbfff;
-
-
-
-html, body, h1, h2, h3, h4, h5, h6 {
-  padding : 0;
-  margin  : 0;
-  border  : 0;
-  font-family : "Open Sans", sans-serif;
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-family: "Open Sans", sans-serif;
 }
-
-body { background-color: @manila; padding: 2em; }
+body {
+  background-color: #fff6bf;
+  padding: 2em;
+}

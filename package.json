@@ -1,11 +1,11 @@
 {
   "name": "fsl.tools",
-  "version": "0.3.0",
+  "version": "0.5.1",
   "description": "fsl.tools website generator",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf build && rimraf docs",
-    "less": "less src/less/style.less > docs/style.css",
+    "less": "lessc src/less/style.less > docs/style.css",
     "markdown": "node ./src/build_js/markdownit.js",
     "make": "npm run markdown && npm run less",
     "mkdir": "mkdir docs && mkdir build",
@@ -30,6 +30,7 @@
     "markdown-it-front-matter": "^0.1.2",
     "markdown-it-include": "^1.0.0",
     "markdown-it-underline": "^1.0.1",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "servehere": "^1.2.0"
   }
 }
