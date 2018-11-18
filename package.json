@@ -1,0 +1,32 @@
+{
+  "name": "fsl.tools",
+  "version": "0.3.0",
+  "description": "fsl.tools website generator",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf build && rimraf docs",
+    "make": "node ./src/build_js/markdownit.js",
+    "mkdir": "mkdir docs && mkdir build",
+    "build": "npm run clean && npm run mkdir && npm run make",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StoneCypher/fsl.tools.git"
+  },
+  "author": "John Haugeland <stonecypher@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/StoneCypher/fsl.tools/issues"
+  },
+  "homepage": "https://github.com/StoneCypher/fsl.tools#readme",
+  "devDependencies": {
+    "glob": "^7.1.3",
+    "markdown-it": "^8.4.2",
+    "markdown-it-fontawesome": "^0.3.0",
+    "markdown-it-front-matter": "^0.1.2",
+    "markdown-it-include": "^1.0.0",
+    "markdown-it-underline": "^1.0.1",
+    "rimraf": "^2.6.2"
+  }
+}
