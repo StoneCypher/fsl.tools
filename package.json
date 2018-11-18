@@ -7,7 +7,7 @@
     "clean": "rimraf build && rimraf docs",
     "less": "lessc src/less/style.less > docs/style.css",
     "markdown": "node ./src/build_js/markdownit.js",
-    "make": "npm run markdown && npm run less",
+    "make": "npm run markdown && npm run less && cp src/assets/CNAME docs",
     "mkdir": "mkdir docs && mkdir build",
     "build": "npm run clean && npm run mkdir && npm run make",
     "test": "echo \"Error: no test specified\" && exit 1"
