@@ -3,6 +3,8 @@ title: FSL.tools - your first stop for Finite State Language
 slug: index.html
 ---
 
+<a rel="nofollow noopener" target="_blank" href="https://stonecypher.github.io/jssm-viz-demo/graph_explorer.html">Live Editor</a> &nbsp;&ndash;&nbsp; [Quick Start](#quickstart) &nbsp;&ndash;&nbsp; [Tools](#) &nbsp;&ndash;&nbsp; [Libraries](#) &nbsp;&ndash;&nbsp; [Example Code](#) &nbsp;&ndash;&nbsp; [Resources](#) &nbsp;&ndash;&nbsp; [Highlighters](#) {#top}
+
 ![](logo%20icon%20and%20acronym%20with%20subtitle%20huge.png){#logo}
 
 Finite State Language, or FSL (pronounced "fossil,") is a programming language to make complex Finite State Machines easy to create and maintain.  Finite State Machines can help make your code simpler, easier to test, more provable, and easier to reason about.
@@ -15,18 +17,31 @@ Support for C and Erlang is under development.  MIT-licensed contributions are w
 
 <br/><br/>
 
-# Quick start
+# <a name="quickstart">Quick start</a>
 
-* Quick-read: ~~[FSL in Five Minutes](#todo)~~
-* Video: ~~[Let's Make a Traffic Light](#todo)~~
-* Video: ~~[Let's use FSL in a Javascript page](#todo)~~
+All quick start items have the same content as text, as a video, and as in-browser live example code, because different people learn different ways.
 
-# Tools
+* **Lightning start**: Let's make a traffic light in FSL
+* **Understanding the job**: What is a state machine?  Why bother?
+* **Understanding the tool**: What is FSL?  Why an entire programming language for this?
+* **Support tools**:
+    * What is the state machine library for?
+    * What is the flowcharter for?
+    * What is the live editor for?
+    * What is the on-web viewer for?
+    * What is the linter for?
+* **FSL and other languages**:
+    * Is FSL useful outside of other languages?
+    * How do I get started with FSL and Javascript?
+    * How do I get started with FSL and SQL?
+    * How do I get started with FSL and Unity3d C#?
 
-* [Live editor](https://stonecypher.github.io/jssm-viz-demo/graph_explorer.htm), in-browser, no installing
-* ~~[Direct viewer](#todo), in-browser, no installing~~
+# <a name="tools">Tools</a>
 
-# Libraries
+* <a rel="nofollow noopener" target="_blank" href="https://stonecypher.github.io/jssm-viz-demo/graph_explorer.html">Live editor</a>, in-browser, no installing
+* ~~[Direct viewer](#todo), send graphs and machines as a link~~
+
+# <a name="libraries">Libraries</a>
 
 * **jssm**, a Javascript state machine library which interprets and executes FSL
     * [npm](https://www.npmjs.com/package/jssm)
@@ -41,7 +56,7 @@ Support for C and Erlang is under development.  MIT-licensed contributions are w
     * [npm](https://www.npmjs.com/package/fsl-pegjs)
     * [github](https://github.com/StoneCypher/fsl-pegjs/)
 
-# Example Code
+# <a name="examples">Example Code</a>
 
 | Machine Name | Image |
 |---|---|
@@ -50,14 +65,14 @@ Support for C and Erlang is under development.  MIT-licensed contributions are w
 | ~~[Extensive States of Matter(#todo)~~ | (pic link) |
 | ~~[Who's On First(#todo)~~ | (pic link) |
 
-# Resources
+# <a name="resources">Resources</a>
 
 * ~~[Complete list of public FSL machines on Github](#todo)~~
 * ~~[Language Walkthrough](#todo)~~
 * ~~[Formal Language Definition](#todo)~~
 * ~~[Book](#todo)~~
 
-# Editor Highlighters
+# <a name="highlighters">Editor Highlighters</a>
 
 * ~~[Textmate (Sublime Text)](#todo)~~
 * ~~[VS Code / Monarch](#todo)~~
