@@ -12,11 +12,13 @@ const fs    = require('fs'),
       mFA   = require('markdown-it-fontawesome'),
       mIn   = require('markdown-it-include'),
       mU    = require('markdown-it-underline'),
+      mAt   = require('markdown-it-attrs'),
       mFM   = require('markdown-it-front-matter'),
 
       md    = mIt({ html: true /*, highlight: (code, lang) => code */ })
                .use(mIn, './src/md/gamma/')
                .use(mU)
+               .use(mAt)
                .use(mFM, fm => {
                   curFM = {};
                   fm.trim().split('\n').map(line => {
