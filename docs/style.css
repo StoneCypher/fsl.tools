@@ -11,12 +11,18 @@ h6 {
   border: 0;
   font-family: "Open Sans", sans-serif;
 }
+h1 {
+  margin-top: 1em;
+}
 body {
   background-color: white;
 }
 #logo {
   width: 100%;
-  margin: 2em 0;
+  margin: 3em 0 1em 0;
+}
+#tlEx {
+  width: 100%;
 }
 #core {
   width: 45em;
