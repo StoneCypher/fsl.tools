@@ -29,14 +29,14 @@ Support for C and Erlang is under development.  MIT-licensed contributions are w
 <script type="text/javascript">
 
   const videos = [
-    { name: 'What are state machines?', video: 'StTqXEQ2l-Y' },
-    { name: 'Why FSL?',                 video: 'puQJNPaGcYc' },
-    { name: 'Using the live editor',    video: 'StTqXEQ2l-Y' },
-    { name: 'Publishing a machine',     video: 'StTqXEQ2l-Y' },
+    { name: 'Using the live editor',    video: 'miomuSGoPzI' },
+    { name: 'What are state machines?', video: 'bFEoMO0pc7k' },
+    { name: 'Why FSL?',                 video: 'ittTpm7Ne5Q' },
+    { name: 'Publishing a machine',     video: 'Mh5LY4Mz15o' },
   ];
 
   function reveal(whichOne) {
-    document.getElementById('videotgt').src        = `https://www.youtube.com/embed/${videos[whichOne]}`;
+    document.getElementById('videotgt').src        = `https://www.youtube.com/embed/${videos[whichOne].video}`;
     document.getElementById('videodrop').className = '';
   }
 
@@ -53,13 +53,13 @@ Support for C and Erlang is under development.  MIT-licensed contributions are w
           tda = document.createElement('a'),
           tdi = document.createElement('img');
 
-    tdi.src     = video.video;
+    tdi.src     = `https://img.youtube.com/vi/${video.video}/maxresdefault.jpg`;
     tda.onclick = () => reveal(i);
-    tda.href    = () => '#videotable_at_top';
+    tda.href    = '#videotable_at_top';
 
     tda.appendChild(tdi);
     td.appendChild(tda);
-    thr.appendChild(td);
+    tdr.appendChild(td);
   });
 
   tab.appendChild(thr);
@@ -67,7 +67,7 @@ Support for C and Erlang is under development.  MIT-licensed contributions are w
 
 </script>
 
-<br/><br/>
+<br/>
 
 # <a name="quickstart">Quick start</a>
 

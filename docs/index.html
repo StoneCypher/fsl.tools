@@ -12,36 +12,55 @@
 <p>FSL ships with full Javascript tooling in es6 modules and commonjs es5, including visualization, with full support for node and the browser.  <strong>FSL has 100% test coverage</strong>.  FSL is free.</p>
 <p>Support for C and Erlang is under development.  MIT-licensed contributions are welcome.</p>
 <p><br/><br/></p>
-<script type="text/javascript">
-  function reveal(whichOne) {
-    window.alert(whichOne);
-  }
-</script>
-<p><a name="videotable_at_top"></a><table id="videotable"></p>
+<p><a name="videotable_at_top"></a><table id="videotable" class="hidden"></p>
   <tr>
-    <th>What are state machines?</th>
-    <th>Why FSL?</th>
-    <th>Using the live editor</th>
-    <th>Publishing a machine</th>
   </tr>
   <tr>
-    <td><a onclick="reveal(0);" href="#videotable_at_top">
-      <img src="https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg"/>
-    </a></td>
-    <td><a onclick="reveal(1);" href="#videotable_at_top">
-      <img src="https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg"/>
-    </a></td>
-    <td><a onclick="reveal(2);" href="#videotable_at_top">
-      <img src="https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg"/>
-    </a></td>
-    <td><a onclick="reveal(3);" href="#videotable_at_top">
-      <img src="https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg"/>
-    </a></td>
   </tr>
 </table><div id="videodrop" class="hidden">
-  <iframe id="videotgt" src="https://www.youtube.com/embed/ximgPmJ9A5s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe id="videotgt" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-<p><br/><br/></p>
+<script type="text/javascript">
+
+  const videos = [
+    { name: 'Using the live editor',    video: 'miomuSGoPzI' },
+    { name: 'What are state machines?', video: 'bFEoMO0pc7k' },
+    { name: 'Why FSL?',                 video: 'ittTpm7Ne5Q' },
+    { name: 'Publishing a machine',     video: 'Mh5LY4Mz15o' },
+  ];
+
+  function reveal(whichOne) {
+    document.getElementById('videotgt').src        = `https://www.youtube.com/embed/${videos[whichOne].video}`;
+    document.getElementById('videodrop').className = '';
+  }
+
+  const tab = document.getElementById('videotable'),
+        thr = document.createElement('tr'),
+        tdr = document.createElement('tr');
+
+  videos.map( (video, i) => {
+    const th = document.createElement('th');
+    th.innerHTML = video.name;
+    thr.appendChild(th);
+
+    const td  = document.createElement('td'),
+          tda = document.createElement('a'),
+          tdi = document.createElement('img');
+
+    tdi.src     = `https://img.youtube.com/vi/${video.video}/maxresdefault.jpg`;
+    tda.onclick = () => reveal(i);
+    tda.href    = '#videotable_at_top';
+
+    tda.appendChild(tdi);
+    td.appendChild(tda);
+    tdr.appendChild(td);
+  });
+
+  tab.appendChild(thr);
+  tab.appendChild(tdr);
+
+</script>
+<br/>
 <h1><a name="quickstart">Quick start</a></h1>
 <p>All quick start items have the same content as text, as a video, and as in-browser live example code, because different people learn different ways.</p>
 <ul>

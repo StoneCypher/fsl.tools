@@ -10,6 +10,7 @@ h6 {
   margin: 0;
   border: 0;
   font-family: "Open Sans", sans-serif;
+  scroll-behavior: smooth;
 }
 body {
   background-color: white;
@@ -40,18 +41,19 @@ h1 {
 #videotable {
   border-collapse: collapse;
   width: 100%;
-  margin-left: -1px solid transparent;
 }
 #videotable th,
 #videotable td {
-  border: 0;
   margin: 0;
   padding: 0;
-  border-left: 2px solid transparent;
+  border: solid transparent;
+  border-width: 0 0.25%;
 }
 #videotable th {
   vertical-align: bottom;
   font-weight: normal;
+  padding-bottom: 0.5em;
+  font-size: 85%;
 }
 #videotable td {
   width: 24%;
@@ -59,7 +61,7 @@ h1 {
 #videotable td img {
   width: 100%;
 }
-#videodrop .hidden {
+#videodrop.hidden {
   display: none;
 }
 #videodrop {
