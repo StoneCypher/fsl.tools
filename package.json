@@ -31,6 +31,6 @@
     "markdown-it-include": "^1.0.0",
     "markdown-it-underline": "^1.0.1",
     "rimraf": "^2.6.2",
-    "servehere": "^1.2.0"
+    "servehere": "^1.6.0"
   }
 }
