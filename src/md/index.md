@@ -3,7 +3,7 @@ title: FSL.tools - your first stop for Finite State Language
 slug: index.html
 ---
 
-<a rel="nofollow noopener" target="_blank" href="https://stonecypher.github.io/jssm-viz-demo/graph_explorer.html">Live Editor</a> &nbsp;&ndash;&nbsp; [Quick Start](#quickstart) &nbsp;&ndash;&nbsp; [Tools](#) &nbsp;&ndash;&nbsp; [Libraries](#) &nbsp;&ndash;&nbsp; [Example Code](#) &nbsp;&ndash;&nbsp; [Resources](#) &nbsp;&ndash;&nbsp; [Highlighters](#) {#top}
+<a rel="nofollow noopener" target="_blank" href="https://stonecypher.github.io/jssm-viz-demo/graph_explorer.html"><b>Live Editor</b></a> &nbsp;&ndash;&nbsp; [Quick Start](#quickstart) &nbsp;&ndash;&nbsp; [Tools](#) &nbsp;&ndash;&nbsp; [Libraries](#) &nbsp;&ndash;&nbsp; [Example Code](#) &nbsp;&ndash;&nbsp; [Resources](#) &nbsp;&ndash;&nbsp; [Highlighters](#) {#top}
 
 ![](logo%20icon%20and%20acronym%20with%20subtitle%20huge.png){#logo}
 
@@ -16,6 +16,58 @@ FSL ships with full Javascript tooling in es6 modules and commonjs es5, includin
 Support for C and Erlang is under development.  MIT-licensed contributions are welcome.
 
 <br/><br/>
+
+<a name="videotable_at_top"></a><table id="videotable" class="hidden">
+  <tr>
+  </tr>
+  <tr>
+  </tr>
+</table><div id="videodrop" class="hidden">
+  <iframe id="videotgt" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<script type="text/javascript">
+
+  const videos = [
+    { name: 'Using the live editor',    video: 'miomuSGoPzI' },
+    { name: 'What are state machines?', video: 'bFEoMO0pc7k' },
+    { name: 'Why FSL?',                 video: 'ittTpm7Ne5Q' },
+    { name: 'Publishing a machine',     video: 'Mh5LY4Mz15o' },
+  ];
+
+  function reveal(whichOne) {
+    document.getElementById('videotgt').src        = `https://www.youtube.com/embed/${videos[whichOne].video}`;
+    document.getElementById('videodrop').className = '';
+  }
+
+  const tab = document.getElementById('videotable'),
+        thr = document.createElement('tr'),
+        tdr = document.createElement('tr');
+
+  videos.map( (video, i) => {
+    const th = document.createElement('th');
+    th.innerHTML = video.name;
+    thr.appendChild(th);
+
+    const td  = document.createElement('td'),
+          tda = document.createElement('a'),
+          tdi = document.createElement('img');
+
+    tdi.src     = `https://img.youtube.com/vi/${video.video}/maxresdefault.jpg`;
+    tda.onclick = () => reveal(i);
+    tda.href    = '#videotable_at_top';
+
+    tda.appendChild(tdi);
+    td.appendChild(tda);
+    tdr.appendChild(td);
+  });
+
+  tab.appendChild(thr);
+  tab.appendChild(tdr);
+
+</script>
+
+<br/>
 
 # <a name="quickstart">Quick start</a>
 
