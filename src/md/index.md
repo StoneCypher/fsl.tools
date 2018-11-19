@@ -17,45 +17,55 @@ Support for C and Erlang is under development.  MIT-licensed contributions are w
 
 <br/><br/>
 
+<a name="videotable_at_top"></a><table id="videotable" class="hidden">
+  <tr>
+  </tr>
+  <tr>
+  </tr>
+</table><div id="videodrop" class="hidden">
+  <iframe id="videotgt" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 <script type="text/javascript">
 
   const videos = [
     { name: 'What are state machines?', video: 'StTqXEQ2l-Y' },
-    { name: 'Why FSL?',                 video: 'StTqXEQ2l-Y' },
+    { name: 'Why FSL?',                 video: 'puQJNPaGcYc' },
     { name: 'Using the live editor',    video: 'StTqXEQ2l-Y' },
     { name: 'Publishing a machine',     video: 'StTqXEQ2l-Y' },
   ];
 
   function reveal(whichOne) {
-    window.alert(whichOne);
+    document.getElementById('videotgt').src        = `https://www.youtube.com/embed/${videos[whichOne]}`;
+    document.getElementById('videodrop').className = '';
   }
 
-</script>
+  const tab = document.getElementById('videotable'),
+        thr = document.createElement('tr'),
+        tdr = document.createElement('tr');
 
-<a name="videotable_at_top"></a><table id="videotable" class="hidden">
-  <tr>
-    <th>What are state machines?</th>
-    <th>Why FSL?</th>
-    <th>Using the live editor</th>
-    <th>Publishing a machine</th>
-  </tr>
-  <tr>
-    <td><a onclick="reveal(0);" href="#videotable_at_top">
-      <img src="https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg"/>
-    </a></td>
-    <td><a onclick="reveal(1);" href="#videotable_at_top">
-      <img src="https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg"/>
-    </a></td>
-    <td><a onclick="reveal(2);" href="#videotable_at_top">
-      <img src="https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg"/>
-    </a></td>
-    <td><a onclick="reveal(3);" href="#videotable_at_top">
-      <img src="https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg"/>
-    </a></td>
-  </tr>
-</table><div id="videodrop" class="hidden">
-  <iframe id="videotgt" src="https://www.youtube.com/embed/ximgPmJ9A5s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
+  videos.map( (video, i) => {
+    const th = document.createElement('th');
+    th.innerHTML = video.name;
+    thr.appendChild(th);
+
+    const td  = document.createElement('td'),
+          tda = document.createElement('a'),
+          tdi = document.createElement('img');
+
+    tdi.src     = video.video;
+    tda.onclick = () => reveal(i);
+    tda.href    = () => '#videotable_at_top';
+
+    tda.appendChild(tdi);
+    td.appendChild(tda);
+    thr.appendChild(td);
+  });
+
+  tab.appendChild(thr);
+  tab.appendChild(tdr);
+
+</script>
 
 <br/><br/>
 
