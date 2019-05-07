@@ -9,7 +9,8 @@
     "markdown": "node ./src/build_js/markdownit.js",
     "make": "npm run markdown && npm run less && cp -r src/assets/* docs/",
     "mkdir": "mkdir docs && mkdir build",
-    "build": "npm run clean && npm run mkdir && npm run make",
+    "makeviewer": "rm -rf docs/viewer && cp -r src/viewer docs/",
+    "build": "npm run clean && npm run mkdir && npm run make && npm run makeviewer",
     "serve": "servehere -d docs/",
     "buildserve": "npm run build && npm run serve",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,6 +28,7 @@
   "devDependencies": {
     "glob": "^7.1.3",
     "less": "^3.8.1",
+    "lz-string": "^1.4.4",
     "markdown-it": "^8.4.2",
     "markdown-it-attrs": "^2.3.2",
     "markdown-it-fontawesome": "^0.3.0",
