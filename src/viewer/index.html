@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+  <head>
+
+    <style type="text/css">
+      body, html, svg, #zoombox { margin: 0; padding: 0; border: 0; line-height: 100%; }
+      body, html                { height: 100%; overflow: hidden; }
+      svg                       { width: 100%; height: 100%; }
+      #zoombox                  { height: 100%; width: 100%; }
+    </style>
+
+    <script type="text/javascript" src="jssm.iife.js"></script>
+    <script type="text/javascript" src="jssm-viz.es5.cjs.js"></script>
+    <script type="text/javascript" src="lz-string.js"></script>
+
+    <script defer type="text/javascript">
+
+      const urlArgs = new URLSearchParams(window.location.search);
+
+      const defaultMachine = 'No -> machine -> was -> specified;',
+            not_compressed = urlArgs.get('u'),
+            s_compressed   = urlArgs.get('z'),
+            decompressed   = s_compressed? LZString.decompressFromEncodedURIComponent(s_compressed) : null,
+            machine        = decompressed || not_compressed || defaultMachine;
+
+      const sm  = jssm.sm,
+            viz = require('jssm-viz');
+
+      const loader = () => document.getElementById('zoombox').innerHTML = viz.dot_to_svg(viz.dot(sm`${machine}`));
+
+      window.onload = loader;
+
+    </script>
+
+  </head>
+
+  <body><div id="zoombox"></div></body>
+
+</html>
