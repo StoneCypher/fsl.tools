@@ -5,6 +5,28 @@ slug: index.html
 
 <a rel="nofollow noopener" target="_blank" href="https://stonecypher.github.io/jssm-viz-demo/graph_explorer.html"><b>Live Editor</b></a> &nbsp;&ndash;&nbsp; [Quick Start](#quickstart) &nbsp;&ndash;&nbsp; [Tools](#) &nbsp;&ndash;&nbsp; [Libraries](#) &nbsp;&ndash;&nbsp; [Example Code](#) &nbsp;&ndash;&nbsp; [Resources](#) &nbsp;&ndash;&nbsp; [Highlighters](#) {#top}
 
+<div class="heads_up">
+  Hello, friends!  It seems that Hacker News found this website.
+</div>
+
+<div class="heads_up">
+  The project you're looking for is called "JSSM," which has been public for a long time.  This is my
+  remake under a new name, which hasn't yet gone public.  I just bought the domain because I'm tired of
+  squatters eating my hobbies.
+</div>
+
+<div class="heads_up">
+  The thing I hope you'll look at instead is the main imlementation of this language,
+  <a href="https://github.com/StoneCypher/jssm/">JSSM</a>).  This site is for <b>the language</b>, and
+  the language is the upcoming evolution of the machine, written with standards, <u>with a book</u>, and
+  so on; I'm pretty happy about that, but in the meantime, I haven't finished the standardization
+  process yet.
+</div>
+
+<div class="heads_up green">
+  &rArr; <a href="https://github.com/StoneCypher/jssm">JSSM</a> &lArr; , the implementation, has been public for years.  Have a look there; it's ready to go.
+</div>
+
 ![](logo%20icon%20and%20acronym%20with%20subtitle%20huge.png){#logo}
 
 Finite State Language, or FSL (pronounced "fossil,") is a programming language to make complex Finite State Machines easy to create and maintain.  Finite State Machines can help make your code simpler, easier to test, more provable, and easier to reason about.

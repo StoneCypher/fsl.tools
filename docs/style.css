@@ -75,3 +75,15 @@ h1 {
   width: 100%;
   height: 25em;
 }
+.heads_up {
+  width: 80%;
+  border-radius: 0.5em;
+  border: 3px solid #b44;
+  background-color: #fee;
+  margin: 1em auto;
+  padding: 1em;
+}
+.green {
+  background-color: #efe;
+  border-color: #4b4;
+}
