@@ -51,7 +51,7 @@ Support for C and Erlang is under development.  MIT-licensed contributions are w
 <script type="text/javascript">
 
   const videos = [
-    { name: 'Using the live editor',    video: 'miomuSGoPzI' },
+    { name: 'Using the live editor',    video: 'W-jyNF3l84c' },
     { name: 'What are state machines?', video: 'bFEoMO0pc7k' },
     { name: 'Why FSL?',                 video: 'ittTpm7Ne5Q' },
     { name: 'Publishing a machine',     video: 'Mh5LY4Mz15o' },
