@@ -27,7 +27,7 @@
   "homepage": "https://github.com/StoneCypher/fsl.tools#readme",
   "devDependencies": {
     "glob": "^7.1.3",
-    "less": "^3.8.1",
+    "less": "^3.13.1",
     "lz-string": "^1.4.4",
     "markdown-it": "^8.4.2",
     "markdown-it-attrs": "^2.3.2",
