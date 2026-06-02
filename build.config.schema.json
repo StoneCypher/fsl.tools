@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BuildConfig",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema":  { "type": "string" },
+    "features": { "$ref": "#/definitions/FeatureFlags" },
+    "profiles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "features": { "$ref": "#/definitions/FeatureFlags" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FeatureFlags": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "docs":      { "type": "boolean" },
+        "eslint":    { "type": "boolean" },
+        "cloc":      { "type": "boolean" },
+        "changelog": { "type": "boolean" },
+        "viz_png":   { "type": "boolean" },
+        "terser":    { "type": "boolean" },
+        "attw":      { "type": "boolean" },
+        "site":      { "type": "boolean" }
+      }
+    }
+  }
+}

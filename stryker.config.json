@@ -1,0 +1,31 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "packageManager": "npm",
+  "reporters": [
+    "html",
+    "clear-text",
+    "progress"
+  ],
+  "ignorePatterns": ["build", "dist", "docs", "coverage", "reports", "**/*.spec.*", "**/*.stoch.*", "**/generated_code/**", "src/build_js/**" ],
+  "clearTextReporter": {
+    "reportMutants": false,
+    "reportTests": false,
+    "reportScoreTable": true
+  },
+  "disableTypeChecks": false,
+  "tsconfigFile": "tsconfig.stryker.json",
+  "testRunner": "vitest",
+  "vitest": {
+    "configFile": "vitest-mutat.config.ts"
+  },
+  "testRunner_comment": "Take a look at https://stryker-mutator.io/docs/stryker-js/vitest-runner for information about the vitest plugin.",
+  "mutate": [
+    "src/ts/**/*.ts",
+    "!src/ts/**/*.spec.ts",
+    "!src/ts/**/*.stoch.ts",
+    "!src/ts/**/*.mutat.ts",
+    "!src/ts/e2e/**",
+    "!src/ts/generated_code/**"
+  ],
+  "coverageAnalysis": "perTest"
+}

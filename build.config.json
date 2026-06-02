@@ -1,0 +1,60 @@
+{
+  "$schema": "./build.config.schema.json",
+  "features": {
+    "docs":      true,
+    "eslint":    true,
+    "cloc":      true,
+    "changelog": true,
+    "viz_png":   true,
+    "terser":    true,
+    "attw":      true,
+    "site":      true
+  },
+  "profiles": {
+    "fast": {
+      "features": {
+        "docs":      false,
+        "eslint":    false,
+        "cloc":      false,
+        "changelog": false,
+        "viz_png":   false,
+        "attw":      false,
+        "site":      false
+      }
+    },
+    "ci": {
+      "features": {
+        "docs":      true,
+        "eslint":    true,
+        "cloc":      true,
+        "changelog": true,
+        "viz_png":   true,
+        "terser":    true,
+        "attw":      true,
+        "site":      true
+      }
+    },
+    "release": {
+      "features": {
+        "docs":      true,
+        "eslint":    true,
+        "cloc":      true,
+        "changelog": true,
+        "viz_png":   true,
+        "terser":    true,
+        "attw":      true,
+        "site":      true
+      }
+    },
+    "ci-lite": {
+      "features": {
+        "docs":      false,
+        "eslint":    false,
+        "cloc":      false,
+        "changelog": false,
+        "viz_png":   false,
+        "site":      false
+      }
+    }
+  }
+}

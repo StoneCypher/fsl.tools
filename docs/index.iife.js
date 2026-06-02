@@ -1,0 +1,2 @@
+this.fsl=this.fsl||{},this.fsl.tools=function(t){"use strict";return t.double=function(t){if("number"!=typeof t)throw new TypeError("input to `double/1` must be a `number`");return 2*t},t.unhandled_external=function(){},t}({});
+//# sourceMappingURL=index.iife.js.map

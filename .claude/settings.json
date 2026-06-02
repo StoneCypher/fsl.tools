@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__ide__getDiagnostics",
+      "Bash(npm view *)",
+      "PowerShell(Get-ChildItem *)",
+      "Bash(gh label list *)",
+      "Bash(gh search *)",
+      "Bash(npm ls *)"
+    ]
+  }
+}
