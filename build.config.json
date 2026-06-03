@@ -8,7 +8,10 @@
     "viz_png":   true,
     "terser":    true,
     "attw":      true,
-    "site":      true
+    "site":      true,
+    "make_cookbook": true,
+    "make_site":     true,
+    "assemble_site": true
   },
   "profiles": {
     "fast": {
@@ -19,7 +22,10 @@
         "changelog": false,
         "viz_png":   false,
         "attw":      false,
-        "site":      false
+        "site":      false,
+        "make_cookbook": false,
+        "make_site":     false,
+        "assemble_site": false
       }
     },
     "ci": {
@@ -31,7 +37,10 @@
         "viz_png":   true,
         "terser":    true,
         "attw":      true,
-        "site":      true
+        "site":      true,
+        "make_cookbook": true,
+        "make_site":     true,
+        "assemble_site": true
       }
     },
     "release": {
@@ -43,7 +52,10 @@
         "viz_png":   true,
         "terser":    true,
         "attw":      true,
-        "site":      true
+        "site":      true,
+        "make_cookbook": true,
+        "make_site":     true,
+        "assemble_site": true
       }
     },
     "ci-lite": {
@@ -53,7 +65,10 @@
         "cloc":      false,
         "changelog": false,
         "viz_png":   false,
-        "site":      false
+        "site":      false,
+        "make_cookbook": false,
+        "make_site":     false,
+        "assemble_site": false
       }
     }
   }

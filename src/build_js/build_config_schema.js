@@ -36,6 +36,9 @@ export const FEATURES = {
   terser:    { stages: [3],    optional: true, defaultEnabled: true, script: 'terser',  requires: ['rollup'] },
   attw:      { stages: [4],    optional: true, defaultEnabled: true, script: 'attw' },
   site:      { stages: [5],    optional: true, defaultEnabled: true, script: 'site',    requires: ['docs'] },
+  make_cookbook: { stages: [5], optional: true, defaultEnabled: true, script: 'make_cookbook', requires: ['site'] },
+  make_site:     { stages: [5], optional: true, defaultEnabled: true, script: 'make_site',     requires: ['site'] },
+  assemble_site: { stages: [6], optional: true, defaultEnabled: true, script: 'assemble_site', requires: ['site'] },
 };
 
 export const MANDATORY_FEATURE_NAMES = Object.entries(FEATURES)
