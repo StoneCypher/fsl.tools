@@ -58,6 +58,7 @@
     "changelog": "rm -f CHANGELOG.md && rm -f CHANGELOG.long.md && rm -f ./src/doc_md/CHANGELOG.md && rm -f ./src/doc_md/CHANGELOG.long.md && better_git_changelog -b && cp CHANGELOG.* ./src/doc_md/",
     "make_site": "node src/build_js/build_site.js",
     "make_cookbook": "node src/fsl.tools/site/scripts/build.cjs",
+    "assemble_site": "node src/build_js/assemble_site.js",
     "build": "node src/build_js/run_build.js",
     "ci": "echo starting && node -e \"console.log(new Date().toLocaleString())\" && npm run build && echo finishing && node -e \"console.log(new Date().toLocaleString())\""
   },
