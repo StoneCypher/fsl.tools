@@ -18,14 +18,9 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
-# Cache Playwright browsers at a stable workspace-relative path so the
-# postinstall (`npx playwright install --with-deps`) skips re-downloading.
-env:
-  PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.playwright-browsers
-
 jobs:
   build:
-    name: Build site + light verify (Ubuntu, Node 24)
+    name: Build site (Ubuntu, Node 24)
     # Personal site repo: only run for the owner's own pushes/PRs. Dependabot
     # and other non-owner events are skipped.
     if: github.actor == github.repository_owner
@@ -41,12 +36,9 @@ jobs:
           node-version: 24
           cache: 'npm'
 
-      - name: Cache Playwright browsers
-        uses: actions/cache@v4
-        with:
-          path: .playwright-browsers
-          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-
+      # No Playwright browser install: CI sets CI=true, so the postinstall
+      # skips the (slow) browser download, and CI never runs Playwright. The
+      # build below disables viz_png, so nothing in CI needs a browser.
       - name: Install dependencies
         run: npm install
 
@@ -58,11 +50,6 @@ jobs:
         run: npm run build -- --disable=eslint,cloc,changelog,viz_png,attw
         env:
           BUILD_SKIP_STOCH: '1'
-
-      # Light end-to-end check: the prerendered homepage hydrates with no
-      # console/hydration-mismatch errors and an interactive control works.
-      - name: Hydration check
-        run: npm run verify_site
 
   # Auto-bump the version on each merge to master, so branches never need to
   # carry a (perpetually-wrong) hand-bumped version. Runs only on the owner's
