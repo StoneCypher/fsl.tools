@@ -1,10 +1,10 @@
-# fsl.tools v0.1.0
+# fsl.tools v{{version}}
 
-> Version 0.1.0 was built on Tuesday, June 2, 2026 at GMT-07:00 `1780409962723` from hash `3f12cde`.
+> Version {{version}} was built on {{built_text}} `{{built}}` from hash `{{gh_hash}}`.
 
 TODO Put the project description here, please.
 
-<!-- Supported embeds: 1780409962723 Tuesday, June 2, 2026 at GMT-07:00 66.66 2 50 3f12cde {{stochbranch}} 66.66 {{stochfunc}} {{stochline}} 4 33 {{unitbranch}} {{unitfunc}} {{unitline}} 29 0.1.0 -->
+<!-- Supported embeds: {{built}} {{built_text}} {{coverage}} {{docblockcount}} {{doccoverage}} {{gh_hash}} {{stochbranch}} {{stochcoverage}} {{stochfunc}} {{stochline}} {{stochtestcount}} {{testcasecount}} {{unitbranch}} {{unitfunc}} {{unitline}} {{unittestcount}} {{version}} -->
 
 
 
@@ -27,16 +27,16 @@ TODO Put the project description here, please.
   </tr>
   <tr>
     <th>Unit</th>
-    <td>29</td>
-    <td>66.66<small>%</small></td>
+    <td>{{unittestcount}}</td>
+    <td>{{coverage}}<small>%</small></td>
     <td>{{unitbranch}}<small>%</small></td>
     <td>{{unitfunc}}<small>%</small></td>
     <td>{{unitline}}<small>%</small></td>
   </tr>
   <tr>
     <th>Stochastic</th>
-    <td>4</td>
-    <td>66.66<small>%</small></td>
+    <td>{{stochtestcount}}</td>
+    <td>{{coverage}}<small>%</small></td>
     <td>{{stochbranch}}<small>%</small></td>
     <td>{{stochfunc}}<small>%</small></td>
     <td>{{stochline}}<small>%</small></td>
@@ -47,12 +47,12 @@ TODO Put the project description here, please.
   <tr>
     <th></th>
     <th>Docblock count</th>
-    <th>50<small>%</small></th>
+    <th>{{doccoverage}}<small>%</small></th>
   </tr>
   <tr>
     <th>Docblock coverage</th>
-    <td>2</td>
-    <td>50<small>%</small></td>
+    <td>{{docblockcount}}</td>
+    <td>{{doccoverage}}<small>%</small></td>
   </tr>
 </table>
 

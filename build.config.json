@@ -1,0 +1,75 @@
+{
+  "$schema": "./build.config.schema.json",
+  "features": {
+    "docs":      true,
+    "eslint":    true,
+    "cloc":      true,
+    "changelog": true,
+    "viz_png":   true,
+    "terser":    true,
+    "attw":      true,
+    "site":      true,
+    "make_cookbook": true,
+    "make_site":     true,
+    "assemble_site": true
+  },
+  "profiles": {
+    "fast": {
+      "features": {
+        "docs":      false,
+        "eslint":    false,
+        "cloc":      false,
+        "changelog": false,
+        "viz_png":   false,
+        "attw":      false,
+        "site":      false,
+        "make_cookbook": false,
+        "make_site":     false,
+        "assemble_site": false
+      }
+    },
+    "ci": {
+      "features": {
+        "docs":      true,
+        "eslint":    true,
+        "cloc":      true,
+        "changelog": true,
+        "viz_png":   true,
+        "terser":    true,
+        "attw":      true,
+        "site":      true,
+        "make_cookbook": true,
+        "make_site":     true,
+        "assemble_site": true
+      }
+    },
+    "release": {
+      "features": {
+        "docs":      true,
+        "eslint":    true,
+        "cloc":      true,
+        "changelog": true,
+        "viz_png":   true,
+        "terser":    true,
+        "attw":      true,
+        "site":      true,
+        "make_cookbook": true,
+        "make_site":     true,
+        "assemble_site": true
+      }
+    },
+    "ci-lite": {
+      "features": {
+        "docs":      false,
+        "eslint":    false,
+        "cloc":      false,
+        "changelog": false,
+        "viz_png":   false,
+        "site":      false,
+        "make_cookbook": false,
+        "make_site":     false,
+        "assemble_site": false
+      }
+    }
+  }
+}
