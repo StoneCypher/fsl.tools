@@ -72,3 +72,6 @@ typings/
 
 # fsl.tools site — generated cookbook output (derived from recipes/, not source)
 src/fsl.tools/site/cookbook/
+
+# Playwright test output
+/test-results/
