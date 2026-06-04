@@ -60,7 +60,8 @@
     "make_cookbook": "node src/fsl.tools/site/scripts/build.cjs",
     "assemble_site": "node src/build_js/assemble_site.js",
     "build": "node src/build_js/run_build.js",
-    "ci": "echo starting && node -e \"console.log(new Date().toLocaleString())\" && npm run build && echo finishing && node -e \"console.log(new Date().toLocaleString())\""
+    "ci": "echo starting && node -e \"console.log(new Date().toLocaleString())\" && npm run build && echo finishing && node -e \"console.log(new Date().toLocaleString())\"",
+    "verify_site": "playwright test src/ts/e2e/hydration.spec.ts"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
