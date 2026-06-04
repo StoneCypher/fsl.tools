@@ -29,4 +29,9 @@ export default defineConfig([
   },
   { files: ["**/*.md"], plugins: { markdown }, language: "markdown/gfm", extends: ["markdown/recommended"] },
   { files: ["**/*.css"], plugins: { css }, language: "css/css", extends: ["css/recommended"] },
+  // The imported fsl.tools site CSS uses design-token custom properties whose
+  // definitions live in a separate @import'd stylesheet; css/no-invalid-properties
+  // can't resolve them across files and reports false positives. Scope just that
+  // rule off for the site CSS (all other css rules stay on and are satisfied).
+  { files: ["src/fsl.tools/site/**/*.css"], plugins: { css }, language: "css/css", rules: { "css/no-invalid-properties": "off" } },
 ]);

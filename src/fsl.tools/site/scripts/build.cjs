@@ -13,6 +13,7 @@
 // Zero dependencies. Just node ≥18.
 
 'use strict';
+/* global __dirname, process */
 const fs   = require('fs');
 const path = require('path');
 

@@ -73,7 +73,8 @@ describe('buildPlan — defaults', () => {
       expect(stages[2]?.sort()).toEqual(['dts', 'rollup', 'update_madlibs'].sort());
       expect(stages[3]?.sort()).toEqual(['terser', 'viz_png'].sort());
       expect(stages[4]?.sort()).toEqual(['attw', 'docs'].sort());
-      expect(stages[5]).toEqual(['site']);
+      expect(stages[5]?.sort()).toEqual(['make_cookbook', 'make_site', 'site'].sort());
+      expect(stages[6]).toEqual(['assemble_site']);
       expect(disabled).toEqual([]);
       expect(warnings).toEqual([]);
     } finally {
@@ -114,7 +115,8 @@ describe('buildPlan — profiles', () => {
         cwd, argv: [], env: { BUILD_PROFILE: 'fast' },
       });
       expect(disabled.sort()).toEqual(
-        ['docs', 'eslint', 'cloc', 'changelog', 'viz_png', 'attw', 'site'].sort()
+        ['docs', 'eslint', 'cloc', 'changelog', 'viz_png', 'attw', 'site',
+         'make_cookbook', 'make_site', 'assemble_site'].sort()
       );
       expect(stages[1]?.sort()).toEqual(['just_test_save', 'typescript'].sort());
     } finally {
@@ -185,7 +187,9 @@ describe('buildPlan — file cascade', () => {
     });
     try {
       const { disabled } = buildPlan({ cwd, argv: ['--env=ci'], env: {} });
-      expect(disabled.sort()).toEqual(['docs', 'site'].sort());
+      expect(disabled.sort()).toEqual(
+        ['docs', 'site', 'make_cookbook', 'make_site', 'assemble_site'].sort()
+      );
     } finally {
       rmSync(cwd, { recursive: true, force: true });
     }
@@ -217,7 +221,9 @@ describe('buildPlan — env-var and CLI feature overrides', () => {
     const cwd = makeTmpRepo({ 'build.config.json': JSON.stringify(baseAllOn) });
     try {
       const { disabled } = buildPlan({ cwd, argv: [], env: { BUILD_DISABLE: 'docs,eslint' } });
-      expect(disabled.sort()).toEqual(['docs', 'eslint', 'site'].sort());
+      expect(disabled.sort()).toEqual(
+        ['docs', 'eslint', 'site', 'make_cookbook', 'make_site', 'assemble_site'].sort()
+      );
     } finally { rmSync(cwd, { recursive: true, force: true }); }
   });
 
@@ -238,7 +244,8 @@ describe('buildPlan — env-var and CLI feature overrides', () => {
     try {
       const { disabled } = buildPlan({ cwd, argv: ['--only=eslint'], env: {} });
       expect(disabled.sort()).toEqual(
-        ['attw', 'changelog', 'cloc', 'docs', 'site', 'terser', 'viz_png'].sort()
+        ['attw', 'changelog', 'cloc', 'docs', 'site', 'terser', 'viz_png',
+         'make_cookbook', 'make_site', 'assemble_site'].sort()
       );
     } finally { rmSync(cwd, { recursive: true, force: true }); }
   });
@@ -320,7 +327,9 @@ describe('buildPlan — dependency cascade', () => {
       const { disabled, warnings } = buildPlan({
         cwd, argv: ['--disable=docs'], env: {},
       });
-      expect(disabled.sort()).toEqual(['docs', 'site'].sort());
+      expect(disabled.sort()).toEqual(
+        ['docs', 'site', 'make_cookbook', 'make_site', 'assemble_site'].sort()
+      );
       expect(warnings.join('\n')).toMatch(/auto-disabling site.*docs/);
     } finally { rmSync(cwd, { recursive: true, force: true }); }
   });
@@ -329,7 +338,7 @@ describe('buildPlan — dependency cascade', () => {
     const cwd = makeTmpRepo({ 'build.config.json': JSON.stringify(baseAllOn) });
     try {
       const { warnings } = buildPlan({
-        cwd, argv: ['--disable=docs,site'], env: {},
+        cwd, argv: ['--disable=docs,site,make_cookbook,make_site,assemble_site'], env: {},
       });
       expect(warnings.length).toBe(0);
     } finally { rmSync(cwd, { recursive: true, force: true }); }

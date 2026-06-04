@@ -62,7 +62,7 @@ only**.
 
 Self-contained under `src/fsl.tools/site/`, mirroring jssm:
 
-```
+```text
 src/fsl.tools/site/
   index.html.tpl              homepage shell with {{PRERENDER}}, {{SCRIPT}}, {{HEAD}} slots
   app.jsx                     <App/> composition (Nav … Footer)
@@ -86,7 +86,7 @@ NOT ported: `cookbook.html`, `components/Cookbook*.jsx`,
 
 ## Output layout
 
-```
+```text
 docs/
   index.html                  redirect → fsl.tools/en/  (meta-refresh + <link rel=canonical>)
   docs/                        TypeDoc (unchanged)

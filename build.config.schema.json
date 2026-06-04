@@ -28,8 +28,11 @@
         "changelog": { "type": "boolean" },
         "viz_png":   { "type": "boolean" },
         "terser":    { "type": "boolean" },
-        "attw":      { "type": "boolean" },
-        "site":      { "type": "boolean" }
+        "attw":          { "type": "boolean" },
+        "site":          { "type": "boolean" },
+        "make_cookbook": { "type": "boolean" },
+        "make_site":     { "type": "boolean" },
+        "assemble_site": { "type": "boolean" }
       }
     }
   }

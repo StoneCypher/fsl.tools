@@ -14,7 +14,7 @@ No SPA. No React on the recipe pages. Output is a folder of plain `.html` files,
 
 ## The repository layout
 
-```
+```text
 src/fsl.tools/site/                  ← everything for the fsl.tools site lives here
 
   recipes/                           ← SOURCE: one file per recipe
@@ -96,7 +96,7 @@ Normal development cycle: `npm run build` then optionally `npm run verify_site`.
 
 ## Filename → URL convention
 
-```
+```text
 recipes/<category>-<slug>.cjs     →     /cookbook/<category>-<slug>.html
 ```
 
@@ -109,7 +109,7 @@ The filename **is** the URL. Pick it carefully — it never changes.
 
 Triples are normal recipes with a fixed slug shape:
 
-```
+```text
 recipes/test-<runner>-<bundler>-<frontend>.cjs
 ```
 

@@ -49,7 +49,7 @@
 - [ ] **Step 1: Add dev dependencies**
 
 Run (each as its own command):
-```
+```text
 npm install --save-dev esbuild
 npm install --save-dev react@^18.3 react-dom@^18.3
 npm install --save-dev @fontsource/ibm-plex-sans @fontsource/jetbrains-mono
@@ -59,7 +59,7 @@ Expected: each exits 0; `package.json` devDependencies now include `esbuild`, `r
 - [ ] **Step 2: Ignore generated site output**
 
 Append to `.gitignore` (note: `build/` is not globally ignored in this repo, so name the generated site dirs explicitly):
-```
+```text
 # fsl.tools site — generated cookbook + esbuild output (derived, not source)
 src/fsl.tools/site/cookbook/
 build/site/
@@ -69,14 +69,14 @@ build/site-ssr/
 - [ ] **Step 3: Verify React resolves under Node**
 
 Run:
-```
+```text
 node -e "require.resolve('react');require.resolve('react-dom/server');require.resolve('react-dom/client');console.log('ok')"
 ```
 Expected: prints `ok`.
 
 - [ ] **Step 4: Commit**
 
-```
+```text
 git add package.json package-lock.json .gitignore
 git commit -m "build: add esbuild, react, and font deps for in-repo fsl.tools site"
 ```
@@ -96,7 +96,7 @@ This half is already CDN-free. Port it first so it's verifiable in isolation.
 - [ ] **Step 1: Copy generator, templates, and recipes from jssm**
 
 Run:
-```
+```text
 node -e "const fs=require('fs');const S='C:/Users/john/projects/jssm/src/fsl.tools/site';const D='src/fsl.tools/site';for(const d of ['recipes','scripts','scripts/templates'])fs.mkdirSync(D+'/'+d,{recursive:true});fs.cpSync(S+'/recipes',D+'/recipes',{recursive:true});fs.cpSync(S+'/scripts',D+'/scripts',{recursive:true});console.log('copied');"
 ```
 Expected: prints `copied`; `src/fsl.tools/site/recipes/` and `.../scripts/` now populated.
@@ -104,7 +104,7 @@ Expected: prints `copied`; `src/fsl.tools/site/recipes/` and `.../scripts/` now 
 - [ ] **Step 2: Confirm the template `@import` is the only external reference and leave it correct**
 
 The cookbook output stays at `…/en/cookbook/` and `colors_and_type.css` stays per-language at `…/en/colors_and_type.css`, so `scripts/templates/cookbook.css`'s existing `@import url('../colors_and_type.css');` resolves correctly from a cookbook page (`…/en/cookbook/foo.html` → `../colors_and_type.css`). **No edit needed** — verify it reads exactly:
-```
+```text
 @import url('../colors_and_type.css');
 ```
 Run: `node -e "const c=require('fs').readFileSync('src/fsl.tools/site/scripts/templates/cookbook.css','utf8');if(!c.includes(\"@import url('../colors_and_type.css')\"))throw new Error('import path changed');console.log('ok')"`
@@ -127,7 +127,7 @@ Expected: prints `cookbook ok: N recipes` where N matches the recipe file count.
 
 - [ ] **Step 5: Commit**
 
-```
+```text
 git add src/fsl.tools/site/recipes src/fsl.tools/site/scripts package.json
 git commit -m "feat: port zero-dep cookbook generator into fsl.tools site"
 ```
@@ -145,7 +145,7 @@ The shared stylesheet currently does `@import url('https://fonts.googleapis.com/
 - [ ] **Step 1: Copy the shared stylesheet from jssm**
 
 Run:
-```
+```text
 node -e "const fs=require('fs');fs.mkdirSync('src/fsl.tools/site/assets/fonts',{recursive:true});fs.copyFileSync('C:/Users/john/projects/jssm/src/fsl.tools/site/colors_and_type.css','src/fsl.tools/site/colors_and_type.css');console.log('copied')"
 ```
 Expected: prints `copied`.
@@ -154,7 +154,7 @@ Expected: prints `copied`.
 
 Weights used by the `@import`: IBM Plex Sans 400/500/600, JetBrains Mono 400/500/700 (latin).
 Run:
-```
+```text
 node -e "const fs=require('fs');const path=require('path');const dst='src/fsl.tools/site/assets/fonts';const want=[['@fontsource/ibm-plex-sans','ibm-plex-sans-latin-400-normal.woff2'],['@fontsource/ibm-plex-sans','ibm-plex-sans-latin-500-normal.woff2'],['@fontsource/ibm-plex-sans','ibm-plex-sans-latin-600-normal.woff2'],['@fontsource/jetbrains-mono','jetbrains-mono-latin-400-normal.woff2'],['@fontsource/jetbrains-mono','jetbrains-mono-latin-500-normal.woff2'],['@fontsource/jetbrains-mono','jetbrains-mono-latin-700-normal.woff2']];for(const [pkg,file] of want){const src=path.join('node_modules',pkg,'files',file);fs.copyFileSync(src,path.join(dst,file));}console.log('fonts copied:',fs.readdirSync(dst).length)"
 ```
 Expected: prints `fonts copied: 6`. (If a filename differs, list `node_modules/@fontsource/ibm-plex-sans/files/` and pick the matching `latin-<wght>-normal.woff2`.)
@@ -184,7 +184,7 @@ Expected: prints `fonts local ok`.
 
 - [ ] **Step 5: Commit**
 
-```
+```text
 git add src/fsl.tools/site/colors_and_type.css src/fsl.tools/site/assets package.json package-lock.json
 git commit -m "feat: self-host IBM Plex Sans + JetBrains Mono for fsl.tools site"
 ```
@@ -206,7 +206,7 @@ Each jssm component is a browser global (`function X(){…}` … `window.X = X;`
 - [ ] **Step 1: Copy the nine homepage components**
 
 Run:
-```
+```text
 node -e "const fs=require('fs');const S='C:/Users/john/projects/jssm/src/fsl.tools/site/components';const D='src/fsl.tools/site/components';fs.mkdirSync(D,{recursive:true});for(const f of ['Nav','Hero','FeatureGrid','Install','Examples','Learn','DiagnosticPanel','Community','Footer'])fs.copyFileSync(S+'/'+f+'.jsx',D+'/'+f+'.jsx');console.log('copied 9')"
 ```
 Expected: prints `copied 9`. (Deliberately excludes `Cookbook*.jsx` and `cookbook-data.jsx`.)
@@ -214,7 +214,7 @@ Expected: prints `copied 9`. (Deliberately excludes `Cookbook*.jsx` and `cookboo
 - [ ] **Step 2: Apply the conversion rule to all nine via a one-shot script**
 
 Run:
-```
+```text
 node -e "const fs=require('fs');const D='src/fsl.tools/site/components';const map={Nav:'Nav',Hero:'Hero',FeatureGrid:'FeatureGrid',Install:'Install',Examples:'Examples',Learn:'Learn',DiagnosticPanel:'DiagnosticPanel',Community:'Community',Footer:'Footer'};for(const [file,main] of Object.entries(map)){const p=D+'/'+file+'.jsx';let s=fs.readFileSync(p,'utf8');const re=new RegExp('\\\\n?window\\\\.'+main+'\\\\s*=\\\\s*'+main+'\\\\s*;?\\\\s*$');if(!re.test(s))throw new Error('window export not found in '+file);s=s.replace(re,'');s='import React from \\'react\\';\\n\\n'+s.replace(/^\\s+|\\s+$/g,'')+'\\n\\nexport { '+main+' };\\n';fs.writeFileSync(p,s);}console.log('converted 9')"
 ```
 Expected: prints `converted 9`.
@@ -237,14 +237,14 @@ Expected: prints `footer ok`.
 - [ ] **Step 4: Verify every component is a valid ES module that exports its component**
 
 Run:
-```
+```text
 node -e "const fs=require('fs');const D='src/fsl.tools/site/components';for(const f of fs.readdirSync(D)){const s=fs.readFileSync(D+'/'+f,'utf8');if(!/^import React from 'react';/.test(s))throw new Error('no React import: '+f);if(!/export \{ \w+ \};\s*$/.test(s))throw new Error('no export: '+f);if(/window\./.test(s))throw new Error('window. left in '+f);}console.log('all 9 are ES modules')"
 ```
 Expected: prints `all 9 are ES modules`.
 
 - [ ] **Step 5: Commit**
 
-```
+```text
 git add src/fsl.tools/site/components
 git commit -m "refactor: convert fsl.tools homepage components to ES modules"
 ```
@@ -446,14 +446,14 @@ Run: `npm run make_site`
 Expected: logs `[site] prerendered homepage + app-<hash>.js (built YYYY-MM-DD) → build/site/`.
 
 Run:
-```
+```text
 node -e "const fs=require('fs');const b='build/site';const html=fs.readFileSync(b+'/index.html','utf8');if(/unpkg\.com|fonts\.googleapis|text\/babel/.test(html))throw new Error('CDN/babel still present');const root=html.match(/<div id=\"root\">([\s\S]*?)<\/div>\s*<script/);if(!root||root[1].trim().length<100)throw new Error('#root not prerendered');if(!fs.readdirSync(b).some(f=>/^app-.*\.js$/.test(f)))throw new Error('no client bundle');console.log('site build ok')"
 ```
 Expected: prints `site build ok`.
 
 - [ ] **Step 8: Commit**
 
-```
+```text
 git add src/fsl.tools/site/app.jsx src/fsl.tools/site/entry.server.jsx src/fsl.tools/site/entry.client.jsx src/fsl.tools/site/index.html.tpl src/build_js/build_site.js package.json
 git commit -m "feat: prerender + hydrate fsl.tools homepage via esbuild (no CDN)"
 ```
@@ -549,7 +549,7 @@ In `package.json` `scripts`, add:
 - [ ] **Step 3: Run the full local chain and verify**
 
 Run (each its own command):
-```
+```text
 npm run make_cookbook
 npm run make_site
 npm run assemble_site
@@ -557,14 +557,14 @@ npm run assemble_site
 Expected final line: `[assemble] docs/fsl.tools/en (homepage + N recipes) + shared assets + root redirect`.
 
 Run:
-```
+```text
 node -e "const fs=require('fs');for(const p of ['docs/index.html','docs/fsl.tools/en/index.html','docs/fsl.tools/en/colors_and_type.css','docs/fsl.tools/en/cookbook/index.html','docs/fsl.tools/assets/fonts'])if(!fs.existsSync(p))throw new Error('missing '+p);const redir=fs.readFileSync('docs/index.html','utf8');if(!/url=fsl\.tools\/en\//.test(redir))throw new Error('redirect target wrong');console.log('assembled layout ok')"
 ```
 Expected: prints `assembled layout ok`.
 
 - [ ] **Step 4: Commit**
 
-```
+```text
 git add src/build_js/assemble_site.js package.json
 git commit -m "feat: assemble fsl.tools site into docs/fsl.tools/en + root redirect"
 ```
@@ -600,20 +600,20 @@ And to each profile's `"features"` object set them to match that profile's `site
 - [ ] **Step 3: Verify the planner accepts the config and stages the trio correctly**
 
 Run:
-```
+```text
 node -e "import('./src/build_js/build_config.js').then(m=>{const {stages}=m.buildPlan({argv:[]});const flat=stages.flat();for(const s of ['make_cookbook','make_site','assemble_site','site'])if(!flat.includes(s))throw new Error('missing '+s);if(stages[6][0]!=='assemble_site')throw new Error('assemble_site not in stage 6');console.log('plan ok; stage5='+JSON.stringify(stages[5])+' stage6='+JSON.stringify(stages[6]))})"
 ```
 Expected: prints a line showing `assemble_site` in stage 6 and `site`/`make_cookbook`/`make_site` in stage 5.
 
 Run (confirm `fast` profile disables the trio):
-```
+```text
 node -e "import('./src/build_js/build_config.js').then(m=>{const {stages,disabled}=m.buildPlan({argv:['--profile=fast']});const flat=stages.flat();for(const s of ['make_cookbook','make_site','assemble_site'])if(flat.includes(s))throw new Error(s+' should be disabled in fast');console.log('fast disables site trio ok')})"
 ```
 Expected: prints `fast disables site trio ok`.
 
 - [ ] **Step 4: Commit**
 
-```
+```text
 git add src/build_js/build_config_schema.js build.config.json
 git commit -m "build: wire fsl.tools site build into the staged orchestrator"
 ```
@@ -688,7 +688,7 @@ Expected: 1 passed. If it fails on a missing browser, run `npx playwright instal
 
 - [ ] **Step 5: Commit**
 
-```
+```text
 git add src/fsl.tools/site/__tests__ package.json
 git commit -m "test: add Playwright hydration check for fsl.tools homepage"
 ```
@@ -711,7 +711,7 @@ Then edit `src/fsl.tools/site/AGENTS.md` to reflect this repo:
 
 - [ ] **Step 2: Commit**
 
-```
+```text
 git add src/fsl.tools/site/AGENTS.md
 git commit -m "docs: add fsl.tools site authoring guide for this repo"
 ```
@@ -728,7 +728,7 @@ Expected: completes through Stage 6; final site stages log the cookbook generati
 - [ ] **Step 2: Re-verify the assembled layout and CDN-freeness**
 
 Run:
-```
+```text
 node -e "const fs=require('fs');const grep=(p)=>fs.readFileSync(p,'utf8');for(const p of ['docs/index.html','docs/fsl.tools/en/index.html','docs/fsl.tools/en/cookbook/index.html','docs/fsl.tools/assets/fonts'])if(!fs.existsSync(p))throw new Error('missing '+p);if(/unpkg\.com|fonts\.googleapis/.test(grep('docs/fsl.tools/en/index.html')))throw new Error('CDN in homepage');const css=grep('docs/fsl.tools/en/colors_and_type.css');if(/fonts\.googleapis/.test(css))throw new Error('CDN font in css');console.log('full build CDN-free ok')"
 ```
 Expected: prints `full build CDN-free ok`.
@@ -744,7 +744,7 @@ Use `mcp__ide__getDiagnostics` on the new/modified files; resolve any lint/type 
 
 - [ ] **Step 5: Final commit if any fixups were needed**
 
-```
+```text
 git add -A
 git commit -m "chore: fsl.tools site build integration fixups"
 ```
