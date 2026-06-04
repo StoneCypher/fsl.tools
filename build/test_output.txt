@@ -1,0 +1,40 @@
+=== UNIT TESTS ===
+
+ RUN  v4.1.2 C:/Users/john/projects/fsl.tools
+      Coverage enabled with v8
+
+
+ Test Files  3 passed (3)
+      Tests  29 passed (29)
+   Start at  15:52:46
+   Duration  1.53s (transform 418ms, setup 0ms, import 752ms, tests 133ms, environment 1ms)
+
+ % Coverage report from v8
+----------|---------|----------|---------|---------|-------------------
+File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+----------|---------|----------|---------|---------|-------------------
+[33;1mAll files[0m | [33;1m  66.66[0m | [33;1m      50[0m | [31;1m  33.33[0m | [33;1m  66.66[0m | [31;1m                 [0m 
+ index.ts |       0 |        0 |       0 |       0 | [31;1m                 [0m 
+[33;1m stub.ts [0m | [33;1m  66.66[0m | [33;1m      50[0m | [31;1m  33.33[0m | [33;1m  66.66[0m | [31;1m38               [0m 
+----------|---------|----------|---------|---------|-------------------
+
+
+=== STOCHASTIC TESTS ===
+
+ RUN  v4.1.2 C:/Users/john/projects/fsl.tools
+      Coverage enabled with v8
+
+
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+   Start at  15:52:53
+   Duration  1.80s (transform 172ms, setup 0ms, import 480ms, tests 565ms, environment 1ms)
+
+ % Coverage report from v8
+----------|---------|----------|---------|---------|-------------------
+File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+----------|---------|----------|---------|---------|-------------------
+[33;1mAll files[0m | [33;1m  66.66[0m | [33;1m      50[0m | [31;1m  33.33[0m | [33;1m  66.66[0m | [31;1m                 [0m 
+ index.ts |       0 |        0 |       0 |       0 | [31;1m                 [0m 
+[33;1m stub.ts [0m | [33;1m  66.66[0m | [33;1m      50[0m | [31;1m  33.33[0m | [33;1m  66.66[0m | [31;1m38               [0m 
+----------|---------|----------|---------|---------|-------------------
