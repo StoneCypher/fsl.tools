@@ -63,3 +63,29 @@ jobs:
       # console/hydration-mismatch errors and an interactive control works.
       - name: Hydration check
         run: npm run verify_site
+
+  # Auto-bump the version on each merge to master, so branches never need to
+  # carry a (perpetually-wrong) hand-bumped version. Runs only on the owner's
+  # pushes to master — never on PRs — and only after the build job passes.
+  # `npm version minor` zeroes the patch and creates a vX.Y.0 tag; the
+  # [skip ci] in the commit message stops this push from re-triggering CI.
+  bump-version:
+    name: Auto-bump minor version + tag (master only)
+    needs: [build]
+    if: github.event_name == 'push' && github.actor == github.repository_owner
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Bump minor version, tag, and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          npm version minor -m "chore: release %s [skip ci]"
+          git push --follow-tags origin HEAD:master
