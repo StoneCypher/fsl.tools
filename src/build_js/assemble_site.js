@@ -9,7 +9,7 @@
  * @example
  *   node src/build_js/assemble_site.js
  */
-import { cpSync, mkdirSync, readFileSync, writeFileSync, readdirSync, existsSync } from 'fs';
+import { cpSync, mkdirSync, rmSync, readFileSync, writeFileSync, readdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -27,6 +27,9 @@ function main() {
   assert(existsSync(join(BUILT, 'index.html')), 'run make_site first (build/site/index.html missing)');
   assert(existsSync(join(SITE, 'cookbook', 'index.html')), 'run make_cookbook first (cookbook/index.html missing)');
 
+  // Wipe the language dir first so stale hashed bundles (app-<hash>.js) from a
+  // prior incremental run never linger alongside the current one.
+  rmSync(EN, { recursive: true, force: true });
   mkdirSync(EN, { recursive: true });
   mkdirSync(join(FSL, 'assets', 'fonts'), { recursive: true });
 
