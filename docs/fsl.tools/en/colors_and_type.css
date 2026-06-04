@@ -152,7 +152,6 @@ body.fsl-typography {
   line-height: var(--lh-normal);
   color: var(--fg-2);
   margin: 0;
-  text-wrap: pretty;
 }
 
 .fsl-display,
