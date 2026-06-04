@@ -1,0 +1,65 @@
+name: CI
+
+# Website build for fsl.tools. Builds the deployable docs/ tree (homepage,
+# cookbook, and TypeDoc API reference) and runs light verification. This is a
+# site repo, not a published library, so the heavy library-validation jobs
+# (cross-platform matrix, mutation testing, version-bump check, release) have
+# been removed. Phase 2 will add an S3 + CloudFront deploy job, gated to the
+# owner pushing/merging to master.
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# Cancel superseded PR runs; let master runs finish.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+# Cache Playwright browsers at a stable workspace-relative path so the
+# postinstall (`npx playwright install --with-deps`) skips re-downloading.
+env:
+  PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.playwright-browsers
+
+jobs:
+  build:
+    name: Build site + light verify (Ubuntu, Node 24)
+    # Personal site repo: only run for the owner's own pushes/PRs. Dependabot
+    # and other non-owner events are skipped.
+    if: github.actor == github.repository_owner
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: .playwright-browsers
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm install
+
+      # Minimal deployable build: mandatory steps + terser, docs (TypeDoc),
+      # site, and the three fsl.tools site steps. eslint/cloc/changelog/
+      # viz_png/attw are disabled; stochastics are skipped via the env toggle.
+      # The assemble step's smoke-asserts fail the build if the site is broken.
+      - name: Build the deployable site
+        run: npm run build -- --disable=eslint,cloc,changelog,viz_png,attw
+        env:
+          BUILD_SKIP_STOCH: '1'
+
+      # Light end-to-end check: the prerendered homepage hydrates with no
+      # console/hydration-mismatch errors and an interactive control works.
+      - name: Hydration check
+        run: npm run verify_site
