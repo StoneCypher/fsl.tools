@@ -1,0 +1,102 @@
+name: CI
+
+# Website build + deploy for fsl.tools. On PRs it just builds the deployable
+# docs/ tree (homepage, cookbook, TypeDoc). On the owner's pushes to master it
+# also deploys docs/fsl.tools to S3 + invalidates CloudFront, and bumps the
+# version. This is a site repo, not a published library, so the heavy
+# library-validation jobs (cross-platform matrix, mutation, version-bump check,
+# npm release) are intentionally absent.
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# Cancel superseded PR runs; let master runs finish.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    name: Build site + deploy on master (Ubuntu, Node 24)
+    # Personal site repo: only run for the owner's own pushes/PRs. Dependabot
+    # and other non-owner events are skipped.
+    if: github.actor == github.repository_owner
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      # No Playwright browser install: CI sets CI=true, so the postinstall
+      # skips the (slow) browser download, and CI never runs Playwright. The
+      # build below disables viz_png, so nothing in CI needs a browser.
+      - name: Install dependencies
+        run: npm install
+
+      # Minimal deployable build: mandatory steps + terser, docs (TypeDoc),
+      # site, and the three fsl.tools site steps. eslint/cloc/changelog/
+      # viz_png/attw are disabled; stochastics are skipped via the env toggle.
+      # The assemble step's smoke-asserts fail the build if the site is broken.
+      - name: Build the deployable site
+        run: npm run build -- --disable=eslint,cloc,changelog,viz_png,attw
+        env:
+          BUILD_SKIP_STOCH: '1'
+
+      # --- Deploy (owner pushes to master only; skipped on PRs) ---
+      - name: Configure AWS credentials
+        if: github.event_name == 'push'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      # Sync docs/fsl.tools (its contents become the bucket root: en/, assets/,
+      # index.html), then force the two content-types that an OS-dependent mime
+      # guess gets wrong (*.js as text/plain breaks the module script; *.woff2
+      # as octet-stream is sloppy), then invalidate the CDN.
+      - name: Deploy to S3 + invalidate CloudFront
+        if: github.event_name == 'push'
+        env:
+          BUCKET: www-fsl-tools-032239181269-us-east-1-an
+          DISTRIBUTION_ID: E1GL6YDTHOMFGS
+        run: |
+          aws s3 sync docs/fsl.tools "s3://$BUCKET" --delete
+          aws s3 cp "s3://$BUCKET/" "s3://$BUCKET/" --recursive --exclude "*" --include "*.js" --include "*.mjs" --include "*.cjs" --content-type text/javascript --metadata-directive REPLACE
+          aws s3 cp "s3://$BUCKET/" "s3://$BUCKET/" --recursive --exclude "*" --include "*.woff2" --content-type font/woff2 --metadata-directive REPLACE
+          aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION_ID" --paths "/*"
+
+  # Auto-bump the version on each merge to master, so branches never need to
+  # carry a (perpetually-wrong) hand-bumped version. Runs only on the owner's
+  # pushes to master — never on PRs — and only after the build job passes.
+  # `npm version minor` zeroes the patch and creates a vX.Y.0 tag; the
+  # [skip ci] in the commit message stops this push from re-triggering CI.
+  bump-version:
+    name: Auto-bump minor version + tag (master only)
+    needs: [build]
+    if: github.event_name == 'push' && github.actor == github.repository_owner
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Bump minor version, tag, and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          npm version minor -m "chore: release %s [skip ci]"
+          git push --follow-tags origin HEAD:master

@@ -15,6 +15,9 @@ import { dirname, join } from 'path';
  *   === UNIT TESTS ===        – deterministic specs (*.spec.ts)
  *   === STOCHASTIC TESTS ===  – property-based tests (*.stoch.ts)
  *
+ * Set BUILD_SKIP_STOCH=1 to skip the stochastic suite (used by lightweight CI
+ * deploy builds); the unit suite still runs and is still written out.
+ *
  * @example
  *   // In package.json scripts:
  *   "just_test_save": "node src/build_js/run_tests_save.js"
@@ -56,8 +59,16 @@ function runTestSet(command) {
   }
 }
 
+// CI deploy builds set BUILD_SKIP_STOCH=1 to skip the (slow) stochastic suite —
+// the deployable site only needs the unit suite as a sanity gate. update_madlibs
+// tolerates a non-parseable stochastic section (it falls back to 'N/A'), so the
+// rest of the build is unaffected.
+const skipStoch = process.env.BUILD_SKIP_STOCH === '1' || process.env.BUILD_SKIP_STOCH === 'true';
+
 const unitResult  = runTestSet('npx vitest run --coverage');
-const stochResult = runTestSet('npx vitest run --config vitest-stoch.config.ts --coverage');
+const stochResult = skipStoch
+  ? { output: '(skipped — BUILD_SKIP_STOCH is set)', failed: false, status: 0, stderr: '' }
+  : runTestSet('npx vitest run --config vitest-stoch.config.ts --coverage');
 
 const combined = [
   '=== UNIT TESTS ===',

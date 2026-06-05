@@ -38,7 +38,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "postinstall": "npx playwright install --with-deps",
+    "postinstall": "node src/build_js/postinstall.js",
     "clean": "node src/build_js/clean.js",
     "update_madlibs": "node src/build_js/update_madlibs.js && cp README.md docs",
     "typescript": "tsc --build tsconfig.json",

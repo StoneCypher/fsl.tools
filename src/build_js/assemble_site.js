@@ -41,7 +41,24 @@ function main() {
   cpSync(join(SITE, 'colors_and_type.css'), join(EN, 'colors_and_type.css'));
   cpSync(join(SITE, 'cookbook'), join(EN, 'cookbook'), { recursive: true });
 
-  // Root redirect -> /fsl.tools/en/
+  // Apex redirect at the bucket root. docs/fsl.tools/ is what gets deployed to
+  // S3 (its contents — en/ and assets/ — become the bucket root), so this
+  // index.html is what fsl.tools/ resolves to. It bounces to the language root.
+  writeFileSync(join(FSL, 'index.html'),
+`<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="refresh" content="0; url=en/"/>
+  <link rel="canonical" href="en/"/>
+  <title>fsl.tools</title>
+</head>
+<body><p>Redirecting to <a href="en/">en/</a>…</p></body>
+</html>
+`);
+
+  // Redirect at the docs/ root too, for serving the docs/ tree directly (e.g.
+  // GitHub Pages) where the site lives under /fsl.tools/en/.
   writeFileSync(join(DOCS, 'index.html'),
 `<!doctype html>
 <html lang="en">
@@ -64,8 +81,9 @@ function main() {
   const manifest = JSON.parse(readFileSync(join(EN, 'cookbook', 'manifest.json'), 'utf8'));
   const recipeCount = readdirSync(join(SITE, 'recipes')).filter(f => f.endsWith('.cjs')).length;
   assert(manifest.count === recipeCount, `cookbook count ${manifest.count} != recipes ${recipeCount}`);
+  assert(/url=en\//.test(readFileSync(join(FSL, 'index.html'), 'utf8')), 'apex redirect (docs/fsl.tools/index.html) missing or wrong');
 
-  console.log(`[assemble] docs/fsl.tools/en (homepage + ${manifest.count} recipes) + shared assets + root redirect`);
+  console.log(`[assemble] docs/fsl.tools (apex redirect + en/ homepage + ${manifest.count} recipes + shared assets)`);
 }
 
 main();
